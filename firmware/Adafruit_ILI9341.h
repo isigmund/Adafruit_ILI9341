@@ -21,12 +21,23 @@ MIT license, all text above must be included in any redistribution
 #include "../Adafruit_mfGFX/Adafruit_mfGFX.h"
 //#include "Adafruit_mfGFX.h"
 
-//#define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+////#define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 
-#define pinLO(_pin)	(PIN_MAP[_pin].gpio_peripheral->BRR = PIN_MAP[_pin].gpio_pin)
-#define pinHI(_pin)	(PIN_MAP[_pin].gpio_peripheral->BSRR = PIN_MAP[_pin].gpio_pin)
+////#define pinLO(_pin)	(PIN_MAP[_pin].gpio_peripheral->BRR = PIN_MAP[_pin].gpio_pin)
+#define pinLO(_pin)	(PIN_MAP[_pin].gpio_peripheral->BRR = pinResetFast(_pin).gpio_pin)
+////#define pinHI(_pin)	(PIN_MAP[_pin].gpio_peripheral->BSRR = PIN_MAP[_pin].gpio_pin)
+#define pinHI(_pin)	(PIN_MAP[_pin].gpio_peripheral->BSRR = pinSetFast(_pin).gpio_pin)
 #define inline inline __attribute__((always_inline))
+
+
+//For example:
+//"PIN_MAP[clockPin_].gpio_peripheral->BRR = PIN_MAP[clockPin_].gpio_pin;"
+//should be
+//pinResetFast(clockPin_);
+//pinSetFast(PINNAME)
+
+
 
 //typedef unsigned char prog_uchar;
 
