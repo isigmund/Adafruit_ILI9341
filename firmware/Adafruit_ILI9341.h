@@ -25,9 +25,9 @@ MIT license, all text above must be included in any redistribution
 #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 
 ////#define pinLO(_pin)	(PIN_MAP[_pin].gpio_peripheral->BRR = PIN_MAP[_pin].gpio_pin)
-#define pinLO(_pin)	(PIN_MAP[_pin].gpio_peripheral->BRR = pinResetFast(_pin).gpio_pin)
+#define pinLO(_pin)	pinResetFast(_pin)
 ////#define pinHI(_pin)	(PIN_MAP[_pin].gpio_peripheral->BSRR = PIN_MAP[_pin].gpio_pin)
-#define pinHI(_pin)	(PIN_MAP[_pin].gpio_peripheral->BSRR = pinSetFast(_pin).gpio_pin)
+#define pinHI(_pin)	pinSetFast(_pin)
 #define inline inline __attribute__((always_inline))
 
 
